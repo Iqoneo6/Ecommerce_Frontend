@@ -66,9 +66,8 @@ const SingleProduct = () => {
         productFilter.push('monitor', 'ssd', 'hdd')
 
     }
-    else {
-        productFilter.push('jewelery')
-
+    else if (productInfo.type === 'jewelery') {
+        productFilter.push('silver', 'gold', 'platinum')
     }
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -102,7 +101,11 @@ const SingleProduct = () => {
             }
         }
     }
-    const deleteProduct = async () => {
+    const deleteProduct = async (product) => {
+        if(!product?._id){
+            toast.error("Product ID not Found", {autoClose:500, theme:"colored"});
+            return;
+        }
         try {
             const { data } = await axios.delete(`${process.env.REACT_APP_ADMIN_DELETE_PRODUCT}/${product._id}`, {
                 headers: {
@@ -255,7 +258,7 @@ const SingleProduct = () => {
                         </DialogContentText>
                     </DialogContent>
                     <DialogActions sx={{ display: 'flex', justifyContent: 'space-evenly' }}>
-                        <Button variant='contained' endIcon={<AiFillDelete />} color='error' onClick={deleteProduct}>Delete</Button>
+                        <Button variant='contained' endIcon={<AiFillDelete />} color='error' onClick={()=>deleteProduct(product)}>Delete</Button>
                         <Button variant='contained' color='primary'
                             onClick={() => setOpenAlert(false)} endIcon={<AiFillCloseCircle />}>Close</Button>
                     </DialogActions>

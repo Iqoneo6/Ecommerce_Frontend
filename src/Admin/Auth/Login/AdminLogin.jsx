@@ -1,7 +1,7 @@
 import './login.css'
 import { Avatar, Button, Checkbox, CssBaseline, FormControlLabel, Grid, InputAdornment, TextField, Typography } from '@mui/material'
 import { Box, Container } from '@mui/system'
-import React, { useEffect } from 'react'
+import React, { useEffect, useContext } from 'react'
 import { useState } from 'react'
 import axios from 'axios'
 import { Link, useNavigate } from 'react-router-dom'
@@ -9,13 +9,14 @@ import { toast } from 'react-toastify'
 import { MdLockOutline } from 'react-icons/md'
 import { RiEyeFill, RiEyeOffFill } from 'react-icons/ri';
 import CopyRight from '../../../Components/CopyRight/CopyRight'
-
+import { ContextFunction } from '../../../Context/Context';
 
 
 const AdminLogin = () => {
 
   const [credentials, setCredentials] = useState({ email: "", password: "", key: "" })
   const [showPassword, setShowPassword] = useState(false);
+  const [setCart, setWishlistData] = useContext(ContextFunction)
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword);
   };
@@ -27,12 +28,12 @@ const AdminLogin = () => {
   useEffect(() => {
     let auth = localStorage.getItem('Authorization');
     if (auth) {
-      navigate("/")
+      navigate("/admin/login")
     }
-  }, [])
+  }, [navigate])
   const handleSubmit = async (e) => {
     e.preventDefault()
-    let emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    let emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z-0-9]+\.)+[a-zA-Z]{2,}))$/;
     try {
       if (!credentials.email && !credentials.password) {
         toast.error("All fields are required", { autoClose: 500, theme: 'colored' })
@@ -54,6 +55,8 @@ const AdminLogin = () => {
         if (receive.success === true) {
           toast.success("Login Successfully", { autoClose: 500, theme: 'colored' })
           localStorage.setItem('Authorization', receive.authToken)
+          setCart([]);
+          setWishlistData([]);
           navigate('/admin/home')
         } else {
           toast.error("Invalid Credentials", { autoClose: 500, theme: 'colored' })

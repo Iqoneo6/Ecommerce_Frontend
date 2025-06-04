@@ -18,10 +18,9 @@
 
 nav .logo {
     /* background-color: green; */
-    width: 100px;
-    font-weight: 800;
-    font-size: 25px;
-
+    width: 150px;
+    height:75px;
+    object-fit: contain;
 }
 
 nav ul {

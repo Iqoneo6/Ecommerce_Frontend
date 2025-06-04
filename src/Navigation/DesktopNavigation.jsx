@@ -4,11 +4,11 @@ import { AiOutlineHeart, AiOutlineShoppingCart, AiFillCloseCircle } from 'react-
 import { CgProfile } from 'react-icons/cg'
 import { FiLogOut } from 'react-icons/fi'
 import { Link, NavLink, useNavigate } from 'react-router-dom';
-import { Badge, Button, Dialog, DialogActions, DialogContent, Menu, MenuItem, Slide, Tooltip, Typography } from '@mui/material';
+import { Badge, Button, Dialog, DialogActions, DialogContent, Tooltip, Typography } from '@mui/material';
 import { ContextFunction } from '../Context/Context';
 import { toast } from 'react-toastify';
 import { getCart, getWishList, handleLogOut, handleClickOpen, handleClose, Transition } from '../Constants/Constant'
-
+import Logo from "../Assets/Images/Wiz Inoa - Logo Text.png"
 const DesktopNavigation = () => {
 
   const { cart, setCart, wishlistData, setWishlistData } = useContext(ContextFunction)
@@ -25,9 +25,10 @@ const DesktopNavigation = () => {
   return (
     <>
       <nav className='nav'>
-        <div className="logo">
+        <div>
           <Link to='/'>
-            <span >Shop It</span>
+            {/* <span >Shop It</span> */}
+            <img  className="logo" src={Logo} alt="Logo"/>
           </Link>
         </div>
         <div className="nav-items">
@@ -37,23 +38,23 @@ const DesktopNavigation = () => {
                 <span className='nav-icon-span'>  Home</span>
               </NavLink>
             </li>
-            {/* <li className="nav-links">
+            <li className="nav-links">
               <NavLink to='/contact'>
                 <span className='nav-icon-span'>  Contact Us</span>
               </NavLink>
-            </li> */}
+            </li>
 
             <li className="nav-links">
               <Tooltip title='Cart'>
                 <NavLink to="/cart">
-                  <span className='nav-icon-span'>Cart    <Badge badgeContent={setProceed ? cart.length : 0}> <AiOutlineShoppingCart className='nav-icon' /></Badge></span>
+                  <span className='nav-icon-span'><Badge badgeContent={setProceed ? cart.length : 0}> <AiOutlineShoppingCart className='nav-icon' /></Badge></span>
                 </NavLink>
               </Tooltip>
             </li>
             <li className="nav-links">
               <Tooltip title='Wishlist'>
                 <NavLink to="/wishlist">
-                  <span className='nav-icon-span'>Wishlist  <Badge badgeContent={setProceed ? wishlistData.length : 0}> <AiOutlineHeart className='nav-icon' /></Badge></span>
+                  <span className='nav-icon-span'><Badge badgeContent={setProceed ? wishlistData.length : 0}> <AiOutlineHeart className='nav-icon' /></Badge></span>
                 </NavLink>
               </Tooltip>
             </li>

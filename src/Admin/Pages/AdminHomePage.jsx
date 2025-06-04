@@ -9,11 +9,13 @@ const AdminHomePage = () => {
     const [user, setUser] = useState([]);
     const [isAdmin, setAdmin] = useState(false);
 
+    let navigate = useNavigate()
+    let authToken = localStorage.getItem("Authorization")
+    
     useEffect(() => {
         getUser();
     }, [])
-    let navigate = useNavigate()
-    let authToken = localStorage.getItem("Authorization")
+
     const getUser = async () => {
         try {
             const { data } = await axios.get(`${process.env.REACT_APP_ADMIN_GET_ALL_USERS}`, {

@@ -104,11 +104,14 @@ const AddProduct = ({ getProductInfo, data }) => {
     else if (productInfo.type === 'electronics') {
         productFilter.push('monitor', 'ssd', 'hdd')
     }
+    else if (productInfo.type === 'jewelery') {
+        productFilter.push('silver', 'gold', 'platinum')
+    }
     else {
         productFilter.push('all')
 
     }
-    const typeDropdown = ['book', 'cloths', 'shoe', 'electronics'];
+    const typeDropdown = ['book', 'cloths', 'shoe', 'electronics', 'jewelery'];
     const shoeBrand = ['adidas', 'hushpuppies', 'nike', 'reebok', 'vans']
 
 
