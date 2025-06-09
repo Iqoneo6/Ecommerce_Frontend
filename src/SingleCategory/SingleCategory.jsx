@@ -52,7 +52,7 @@ const SingleCategory = () => {
 
     }
     else if (cat === 'jewelry') {
-        productFilter.push('All')
+        productFilter.push('All', 'Gold', 'Silver', 'Diamond', 'Price Low To High', 'Price High To Low', 'High Rated', 'Low Rated')
 
     }
 
